@@ -19,9 +19,9 @@ const ccLogo = document.querySelector('.cc-logo span:nth-child(2) img')
 
 const setCardColors = (type) => {
   const colors = {
-    visa: ['orange', 'green'],
-    mastercard: ['red', 'green'],
-    alelo: ['#0E0E0E', '#21FF0E'],
+    visa: ['#161663', '#040435'],
+    mastercard: ['#370c53', '#370c53'],
+    alelo: ['#131d13', '#1d911d'],
     default: ['#000', 'gray']
   }
 
@@ -32,7 +32,7 @@ const setCardColors = (type) => {
 
 }
 
-setCardColors('mastercard')
+setCardColors('visa')
 globalThis.setCardColors = setCardColors
 
 
