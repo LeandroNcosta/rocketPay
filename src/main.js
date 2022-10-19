@@ -23,6 +23,7 @@ const setCardColors = (type) => {
     visa: ['#161663', '#040435'],
     mastercard: ['#370c53', '#370c53'],
     alelo: ['#000', '#307230'],
+    elo: ['none', 'none'],
     default: ['#000', 'gray']
   }
 
@@ -33,7 +34,7 @@ const setCardColors = (type) => {
 
 }
 
-setCardColors('visa')
+setCardColors('elo')
 globalThis.setCardColors = setCardColors
 
 /*
@@ -71,5 +72,41 @@ const expirationDatePattern = {
     }
   }
 };
-const mask = IMask(expirationDate, expirationDatePattern);
+const expirationDateMasked = IMask(expirationDate, expirationDatePattern);
 
+
+const cardNumber = document.querySelector('#card-number')
+
+var cardNumberPattern = {
+  mask: [
+    {
+      mask: '0000 0000 0000 0000',
+      regex: /^4\d{0, 15}/,
+      cardType: 'visa',
+    },
+    {
+      mask: '0000 0000 0000 0000',
+      regex: /^5[1-5]\d{0,2}|^22[2-9]\d{0,1}|^2[3-7]\d{0,2}\d{0,12}/,
+      cardType: 'mastercard',
+
+    },
+    {
+      mask: '0000 0000 0000 0000',
+      regex: /\d/,
+      cardType: 'alelo',
+
+    },
+    {
+      mask: '0000 0000 0000 0000',
+      cardType: 'default'
+    }
+  ],
+  dispatch: function (appended, dynamicMasked) {
+    const number = (dynamicMasked.value + appended).replace(/\D/g, '');
+    const foundMask = dynamicMasked.compiledMasks.find(({ regex }) => number.match(regex));
+
+    return foundMask
+  },
+}
+
+const cardNumbermasked = IMask(cardNumber, cardNumberPattern);
