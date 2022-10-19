@@ -1,4 +1,5 @@
 import "./css/index.css"
+import IMask from "imask"
 
 /*  
 PASSO A PASSO
@@ -21,7 +22,7 @@ const setCardColors = (type) => {
   const colors = {
     visa: ['#161663', '#040435'],
     mastercard: ['#370c53', '#370c53'],
-    alelo: ['#131d13', '#1d911d'],
+    alelo: ['#000', '#307230'],
     default: ['#000', 'gray']
   }
 
@@ -35,5 +36,40 @@ const setCardColors = (type) => {
 setCardColors('visa')
 globalThis.setCardColors = setCardColors
 
+/*
+PASSO A PASSO
 
+passo 1 - referenciar os html com query
+passo 2 - fazer a empressão regular do cvd
+poasso 3 - fazer a expressão regular do cencimento
+*/
+
+
+// Uso da lib imask js
+
+const securityCode = document.querySelector('#security-code')
+
+const securityCodePattern = {
+  mask: '0000'
+};
+const resultMaskSecurity = IMask(securityCode, securityCodePattern);
+
+const expirationDate = document.querySelector('#expiration-date')
+
+const expirationDatePattern = {
+  mask: 'MM{/}YY',
+  blocks: {
+    MM: {
+      mask: IMask.MaskedRange,
+      from: 1,
+      to: 12
+    },
+    YY: {
+      mask: IMask.MaskedRange,
+      from: String(new Date().getFullYear()).slice(2),
+      to: String(new Date().getFullYear() + 10).slice(2)
+    }
+  }
+};
+const mask = IMask(expirationDate, expirationDatePattern);
 
