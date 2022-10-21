@@ -60,9 +60,11 @@ form button {
   line-height: 1.7rem;
   color: #121212;
 
-  transition: filter 0.3s;
+  transition: all 0.5s;
 }
 
 form button:hover {
-  filter: brightness(1.1);
+  /* filter: brightness(1.1); */
+  background-color: #205b6d;
+  padding: 1.56rem 0;
 }
