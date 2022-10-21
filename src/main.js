@@ -131,8 +131,12 @@ cardNumbermasked.on('accept', () => {
   showTypedNameInRealTime(cardNumber, '.cc-number', '1234 5678 9012 3456')
 })
 
-cardHolder.addEventListener('input', () =>
+cardHolder.addEventListener('input', () => {
+   if(cardHolder.value.length > 25){
+     cardHolder.value === ""
+    }
   showTypedNameInRealTime(cardHolder, '.cc-holder .value', 'FULANO DA SILVA'))
+}
 
 expirationDateMasked.on('accept', () =>
   showTypedNameInRealTime(expirationDate, '.cc-expiration .value', '02/33'))
